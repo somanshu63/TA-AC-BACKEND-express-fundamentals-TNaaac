@@ -12,19 +12,9 @@ app.use(logger("dev"));
 app.use(cookieParser());
 
 app.use((req, res, next) => {
-    var count = req.cookies.count;
-    if(count){
-        res.cookie("count", Number(count) + 1);
-    }else{
-        res.cookie("count", 1)
-    }
+    res.cookie('username', "som")
     next();
 });
-
-app.use('/admin', (req, res, next) => {
-    next("Unauthorized");
-  });
-
 
 //routes
 app.get('/', (req, res) => {
