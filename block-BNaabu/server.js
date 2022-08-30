@@ -9,6 +9,11 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/public'));
 app.use(logger("dev"));
 
+
+app.use('/admin', (req, res, next) => {
+    next("Unauthorized");
+  });
+
 //routes
 app.get('/', (req, res) => {
     res.send('index page');
@@ -18,17 +23,13 @@ app.get('/about', (req, res) => {
     res.send('about page');
 });
 
-app.use((req, res, next) => {
-    if (req.url === "admin") {
-      return next("Unauthorized");
-    }
-    next();
-  });
 
+//error 404
 app.use((req, res, next) => {
     res.send('page not found');
 });
 
+//custom error
 app.use((err, req, res, next) => {
     res.send(err);
 });
