@@ -13,7 +13,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/about', (req, res) => {
+app.use('/about', (req, res, next) => {
    res.cookie("username", "somanshu");
    res.send();
 }); 
